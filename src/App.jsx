@@ -1,6 +1,6 @@
-
 import { useState } from 'react'
 import { contactosIniciales } from './data/contactos'
+import { buscar } from './utils/busqueda'
 import './App.css'
 
 function App() {
@@ -9,10 +9,8 @@ function App() {
   const [nombre, setNombre] = useState('')
   const [telefono, setTelefono] = useState('')
 
-  // Búsqueda escrita a mano
-  const visibles = contactos.filter((c) =>
-    c.nombre.toLowerCase().includes(texto.toLowerCase())
-  )
+  // Búsqueda mediante el adaptador (fuse.js queda aislado en utils/busqueda.js)
+  const visibles = buscar(contactos, texto)
 
   function agregar(e) {
     e.preventDefault()
